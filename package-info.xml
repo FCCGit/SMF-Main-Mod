@@ -18,6 +18,9 @@
 		<!-- Modify the default variable values -->
 		<modification type="file">mod_Template.xml</modification>
 		
+		<!-- Move recent post ticker to top of index -->
+		<modification type="file">mod_RecentPost.xml</modification>
+		
 		<!-- Create administration page for DirectorTools -->
 		<!--modification type="file">mod_Admin.xml</modification-->
 		
@@ -32,6 +35,7 @@
 		<readme type="file">uninstall.txt</readme>
 		<modification type="file" reverse="true">mod_Subs.xml</modification>
 		<modification type="file" reverse="true">mod_Template.xml</modification>
+		<modification type="file" reverse="true">mod_RecentPost.xml</modification>
 		<!--modification type="file" reverse="true">mod_Admin.xml</modification-->
 		<remove-file name="$boarddir/slacker.php" />
 		<remove-file name="$boarddir/slacker_data.php" />
