@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	<id>ryshar:DirectorTools</id>
+	<version>1.0</version>
+	<file name="$sourcedir/Admin.php">
+		<operation>
+			<search position="before" whitespace="loose"><![CDATA['subsections' => array(
+                                                'general' => array($txt['mods_cat_modifications_misc']),
+]]></search>
+			<add><![CDATA[			
+					'directorConfig' => array(
+						'title' => 'Director Tools',
+						'file' => 'DirectorTools/director_config.php',
+						'function' => 'modifyConfig',
+						'icon' => 'modifications.gif',
+						'subsections' => array(
+						)
+					),
+			]]></add>
+		</operation>
+	</file>
+</modification>	

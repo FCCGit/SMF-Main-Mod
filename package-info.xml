@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+	<id>ryshar:DirectorTools</id>
+	<name>Director Tools</name>
+	<type>modification</type>
+	<version>1.0</version>
+	<install for="1.1 - 1.1.99">
+		<readme type="file">readme.txt</readme>
+		<readme type="inline" parsebbc="true">[color=red]Error! This mod does not support your version of SMF.[/color]</readme>
+	</install>
+	<install for="2.0.2 - 2.0.2">
+		<readme type="file">readme.txt</readme>
+		
+		<!-- Add new tabs -->
+		<modification type="file">mod_Subs.xml</modification>
+		
+		<!-- Modify the default variable values -->
+		<modification type="file">mod_Template.xml</modification>
+		
+		<!-- Create administration page for DirectorTools -->
+		<!--modification type="file">mod_Admin.xml</modification-->
+		
+		<create-dir name="DirectorTools" destination="$sourcedir"/>
+		<require-dir name="js" destination="$boarddir" />
+		<require-file name="SlackerTracker/slacker.php" destination="$boarddir" />
+		<require-file name="SlackerTracker/slacker_data.php" destination="$boarddir" />
+		<require-file name="director_config.php" destination="$sourcedir/DirectorTools" />
+		<require-dir name="SlackerTracker" destination="$sourcedir/DirectorTools" />
+	</install>
+	<uninstall>
+		<readme type="file">uninstall.txt</readme>
+		<modification type="file" reverse="true">mod_Subs.xml</modification>
+		<modification type="file" reverse="true">mod_Template.xml</modification>
+		<!--modification type="file" reverse="true">mod_Admin.xml</modification-->
+		<remove-file name="$boarddir/slacker.php" />
+		<remove-file name="$boarddir/slacker_data.php" />
+		<remove-dir name="$sourcedir/DirectorTools" />
+	</uninstall>
+</package-info>	

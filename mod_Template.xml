@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	<id>ryshar:DirectorTools</id>
+	<version>1.0</version>
+	<file name="$themedir/languages/index.english.php">
+		<operation>
+			<search position="replace" whitespace="exact"><![CDATA[$txt['home'] = 'Home';]]></search>
+			<add><![CDATA[$txt['home'] = 'Forums';]]></add>
+		</operation>
+	</file>
+</modification>	
