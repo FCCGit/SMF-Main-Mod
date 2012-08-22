@@ -1,6 +1,6 @@
 <?php
 //include SMF settings for db info
-require_once("./Settings.php");
+require_once("/home/dubes/www/forums/Settings.php");
 
 //number of previous months to get data for
 $PREV_MONTHS = 6;
