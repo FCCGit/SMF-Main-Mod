@@ -16,7 +16,7 @@
 			<add><![CDATA[
 			'wiki' => array(
 				'title' => 'Wiki',
-				'href' => '/wiki/',
+				'href' => '/forums/wiki.php',
 				'show' => true,
 				'sub_buttons' => array(
 				),
@@ -29,7 +29,7 @@
 				'sub_buttons' => array(
 					'slackerTracker' => array(
 						'title' => 'Slacker Tracker',
-						'href' => 'slacker.php',
+						'href' => '/forums/slacker.php',
 						'show' => true,
 					)
 				),
