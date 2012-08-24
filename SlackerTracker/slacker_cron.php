@@ -28,36 +28,42 @@ function getKills($charid, $startdate){
 				if(!is_null($value) && $value != ""){
 					$eveapi = new SimpleXMLElement($value);
 				} else {
-					echo "\tBlank response for ".$charid." on attempt ".$attempts;
+					echo "\tBlank response for ".$charid." on attempt ".$attempts."\n";
 				}
 			}catch(Exception $e) {
-				echo "\tCaught exception ".$charid." on attempt ".$attempts;
+				echo "\tCaught exception ".$charid." on attempt ".$attempts."\n";
+	                        echo $e."\n";
 			}
 		}
+		
+		try{
+			$kills += count($eveapi->xpath("/eveapi/result/rowset/row/victim[@characterID!='".$charid."']"));
+			$losses += count($eveapi->xpath("/eveapi/result/rowset/row/victim[@characterID='".$charid."']"));
+			$lastRow = $eveapi->xpath("/eveapi/result/rowset/row[last()]");
 
-		$kills += count($eveapi->xpath("/eveapi/result/rowset/row/victim[@characterID!='".$charid."']"));
-		$losses += count($eveapi->xpath("/eveapi/result/rowset/row/victim[@characterID='".$charid."']"));
-		$lastRow = $eveapi->xpath("/eveapi/result/rowset/row[last()]");
-
-		//if we're on the next page, the lastrow is included again, so we have remove it
-		if(count($lastRow) == 0){
-			$lastID = NULL;
-		} else {
-			$attr = $lastRow[0]->victim->attributes();
-			if($lastID != "" && $attr['characterID'] == $charid){
-				$losses--;
-			} else if($lastID != "") {
-				$kills--;
-			}
-	
-			//check to see if we need to get another page
+			//if we're on the next page, the lastrow is included again, so we have remove it
 			if(count($lastRow) == 0){
 				$lastID = NULL;
-			} else if(count($lastRow) == 1 && strval($lastID) == strval($lastRow[0]['killInternalID'])){
-				$lastID = NULL;
 			} else {
-				$lastID = $lastRow[0]['killInternalID'];
+				$attr = $lastRow[0]->victim->attributes();
+				if($lastID != "" && $attr['characterID'] == $charid){
+					$losses--;
+				} else if($lastID != "") {
+					$kills--;
+				}
+	
+				//check to see if we need to get another page
+				if(count($lastRow) == 0){
+					$lastID = NULL;
+				} else if(count($lastRow) == 1 && strval($lastID) == strval($lastRow[0]['killInternalID'])){
+					$lastID = NULL;
+				} else {
+					$lastID = $lastRow[0]['killInternalID'];
+				}
 			}
+		}catch(Exception $e){
+			echo "\tCaught exception on ".$charid."\n";
+			echo $e."\n";
 		}
 	}
 
@@ -122,8 +128,29 @@ foreach($corpData as $key => $row){
 		$startdate = strtotime("-1 month", $startdate);
 
 		try{
+			//get kills
 			$killInfo = getKills($key, $startdateGMT);
-			mysql_query("INSERT INTO smf_slacker_tracker (charid,name,title,kills,losses,month,updated_date) VALUES(".$key.",'".$row['name']."','".$row['title']."',".$killInfo['kills'].",".$killInfo['losses'].",'".date("Y-m-d", $startdate)."',SYSDATE())");
+
+			//test to make sure the MySQL server is still connected
+			if (!mysql_ping ($connection)) {
+				mysql_close($connection);
+				$connection = mysql_connect($db_server,$db_user,$db_passwd);
+				if (!$connection){
+				        die("Database connection is all sorts of fucked up, fix that shit.");
+				}
+				mysql_select_db($db_name, $connection);
+			}
+
+			//do insert, check for errors afterwards
+			$thisQuery = "INSERT INTO smf_slacker_tracker (charid,name,title,kills,losses,month,updated_date) VALUES(".$key.",'".mysql_real_escape_string($row['name'])."','".mysql_real_escape_string($row['title'])."',".$killInfo['kills'].",".$killInfo['losses'].",'".date("Y-m-d", $startdate)."',SYSDATE())";
+			mysql_query($thisQuery);
+			$rowsAff = mysql_affected_rows();
+			if($rowsAff != 1){
+				echo "\tQuery failure!\n";
+				echo "\tRows affected: ".mysql_affected_rows()." \n";
+				echo "\t".$thisQuery."\n";
+				echo "\t".mysql_error()."\n";
+			}
 		}catch(Exception $e) {
 			echo "\tDatabase exception ".$row['name']." on attempt ".$attempts;
 		}

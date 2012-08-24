@@ -17,21 +17,16 @@
 			'wiki' => array(
 				'title' => 'Wiki',
 				'href' => '/forums/wiki.php',
-				'show' => true,
+				'show' => !$user_info['is_guest'],
 				'sub_buttons' => array(
 				),
 				'is_last' => $context['right_to_left'],
 			),
 			'directorTools' => array(
 				'title' => 'Director Tools',
-				'href' => 'slacker.php',
-				'show' => true,
+				'href' => '/forums/slacker.php',
+				'show' => !$user_info['is_guest'],
 				'sub_buttons' => array(
-					'slackerTracker' => array(
-						'title' => 'Slacker Tracker',
-						'href' => '/forums/slacker.php',
-						'show' => true,
-					)
 				),
 				'is_last' => $context['right_to_left'],
 			),]]></add>
