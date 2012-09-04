@@ -33,8 +33,7 @@
 		<require-file name="director_config.php" destination="$sourcedir/DirectorTools" />
 		<require-file name="Wiki.template.php" destination="$themedir/default" />
 		<require-file name="Director.template.php" destination="$themedir/default" />
-		<require-file name="api_check.php" destination="$sourcedir" />
-		<require-file name="slacker.php" destination="$sourcedir" />
+		<require-file name="director.php" destination="$sourcedir" />
 		<require-file name="wiki.php" destination="$sourcedir" />
 		<require-dir name="SlackerTracker" destination="$sourcedir/DirectorTools" />
 		<require-dir name="APIChecker" destination="$sourcedir/DirectorTools" />

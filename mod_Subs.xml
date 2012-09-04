@@ -22,19 +22,19 @@
 				),
 				'is_last' => $context['right_to_left'],
 			),
-			'directorTools' => array(
+			'director' => array(
 				'title' => 'Director Tools',
-				'href' => $scripturl,
+				'href' => $scripturl.'?action=director',
 				'show' => !$user_info['is_guest'],
 				'sub_buttons' => array(
 					'slacker' => array(
                         'title' => 'Slacker Tracker',
-                        'href' => $scripturl.'?action=slacker',
+                        'href' => $scripturl.'?action=director;area=slacker',
                         'show' => !$user_info['is_guest'],
 					),
 					'apiCheck' => array(
                         'title' => 'API Checker',
-                        'href' => $scripturl.'?action=apiCheck',
+                        'href' => $scripturl.'?action=director;area=apiCheck',
                         'show' => !$user_info['is_guest'],
 					),
 				),

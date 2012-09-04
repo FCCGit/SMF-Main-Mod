@@ -8,8 +8,7 @@
 			<search position="before" whitespace="exact"><![CDATA['xmlhttp' => array('Xml.php', 'XMLhttpMain'),
 ]]></search>
 			<add><![CDATA[		'wiki' => array('wiki.php', 'Render'),
-		'slacker' => array('slacker.php', 'Render'),
-		'apiCheck' => array('api_check.php', 'Render'),
+		'director' => array('director.php', 'Render'),
 ]]></add>
 		</operation>		
 	</file>
