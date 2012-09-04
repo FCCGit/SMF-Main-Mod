@@ -41,5 +41,17 @@
 				'is_last' => $context['right_to_left'],
 			),]]></add>
 		</operation>
+		<operation>
+			<search position="replace" whitespace="exact"><![CDATA[			'help' => array(
+				'title' => $txt['help'],
+				'href' => $scripturl . '?action=help',
+				'show' => true,
+				'sub_buttons' => array(
+				),
+			),
+]]></search>
+			<add><![CDATA[			/*Removed Help button*/
+]]></add>
+		</operation>		
 	</file>
 </modification>	
