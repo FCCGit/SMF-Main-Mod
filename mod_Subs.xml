@@ -16,7 +16,7 @@
 			<add><![CDATA[
 			'wiki' => array(
 				'title' => 'Wiki',
-				'href' => '/forums/wiki.php',
+				'href' => $scripturl.'?action=wiki',
 				'show' => !$user_info['is_guest'],
 				'sub_buttons' => array(
 				),
@@ -24,9 +24,19 @@
 			),
 			'directorTools' => array(
 				'title' => 'Director Tools',
-				'href' => '/forums/slacker.php',
+				'href' => $scripturl,
 				'show' => !$user_info['is_guest'],
 				'sub_buttons' => array(
+					'slacker' => array(
+                        'title' => 'Slacker Tracker',
+                        'href' => $scripturl.'?action=slacker',
+                        'show' => !$user_info['is_guest'],
+					),
+					'apiCheck' => array(
+                        'title' => 'API Checker',
+                        'href' => $scripturl.'?action=apiCheck',
+                        'show' => !$user_info['is_guest'],
+					),
 				),
 				'is_last' => $context['right_to_left'],
 			),]]></add>

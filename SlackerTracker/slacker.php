@@ -1,16 +1,3 @@
-<?php
-error_reporting(E_ALL);
-
-// Which Theme are we using?
-$ssi_theme = 5;
-// Layers to be utilized
-$ssi_layers = array('html', 'body');
-// Change "true" to "false" to disable Gzip if not supported on your server
-//$ssi_gzip = true;
-//This is the SSI.php file in the Board dir.
-require('SSI.php');
-?>
-
 <link rel="stylesheet" type="text/css" href="js/jqPlot/jquery.jqplot.css" />
 <style type="text/css">
 #window_div{
@@ -251,7 +238,9 @@ function generatePlots(id){
 <div id="info_div">
 <?php
 //include SMF settings for db info
-require_once("./Settings.php");
+global $boarddir;
+require_once($boarddir."/Settings.php");
+global $db_server,$db_user,$db_passwd;
 
 //connect
 $connection = mysql_connect($db_server,$db_user,$db_passwd);
@@ -327,9 +316,3 @@ Minimum Kills:<input id="threshold" type="text" size="1" onchange="colorRows()" 
 <div style="float:left;width:100%;height:25px;">&nbsp;</div>
 <div id="killGraph_div"></div>
 </div>
-
-<?php
-//Let's murder SSI for now
-ssi_shutdown();
-//[n3rve] thinks this should do.
-?>

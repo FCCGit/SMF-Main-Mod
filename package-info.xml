@@ -15,6 +15,9 @@
 		<!-- Add new tabs -->
 		<modification type="file">mod_Subs.xml</modification>
 		
+		<!-- Add new index actions -->
+		<modification type="file">mod_Index.xml</modification>
+		
 		<!-- Modify the default variable values -->
 		<modification type="file">mod_Template.xml</modification>
 		
@@ -26,19 +29,27 @@
 		
 		<create-dir name="DirectorTools" destination="$sourcedir"/>
 		<require-dir name="js" destination="$boarddir" />
-		<require-file name="SlackerTracker/slacker.php" destination="$boarddir" />
 		<require-file name="SlackerTracker/slacker_data.php" destination="$boarddir" />
 		<require-file name="director_config.php" destination="$sourcedir/DirectorTools" />
+		<require-file name="Wiki.template.php" destination="$themedir/default" />
+		<require-file name="Director.template.php" destination="$themedir/default" />
+		<require-file name="api_check.php" destination="$sourcedir" />
+		<require-file name="slacker.php" destination="$sourcedir" />
+		<require-file name="wiki.php" destination="$sourcedir" />
 		<require-dir name="SlackerTracker" destination="$sourcedir/DirectorTools" />
+		<require-dir name="APIChecker" destination="$sourcedir/DirectorTools" />
 	</install>
 	<uninstall>
 		<readme type="file">uninstall.txt</readme>
+		<modification type="file" reverse="true">mod_Index.xml</modification>
 		<modification type="file" reverse="true">mod_Subs.xml</modification>
 		<modification type="file" reverse="true">mod_Template.xml</modification>
 		<modification type="file" reverse="true">mod_RecentPost.xml</modification>
-		<!--modification type="file" reverse="true">mod_Admin.xml</modification-->
-		<remove-file name="$boarddir/slacker.php" />
 		<remove-file name="$boarddir/slacker_data.php" />
+		<remove-file name="$themedir/default/Wiki.template.php" />
+		<remove-file name="$themedir/default/Director.template.php" />
+		<remove-file name="$sourcedir/slacker.php" />
+		<remove-file name="$sourcedir/wiki.php" />
 		<remove-dir name="$sourcedir/DirectorTools" />
 	</uninstall>
 </package-info>	
