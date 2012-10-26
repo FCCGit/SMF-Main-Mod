@@ -25,17 +25,17 @@
 			'director' => array(
 				'title' => 'Director Tools',
 				'href' => $scripturl.'?action=director',
-				'show' => !$user_info['is_guest'],
+				'show' => $context['allow_moderation_center'],
 				'sub_buttons' => array(
 					'slacker' => array(
                         'title' => 'Slacker Tracker',
                         'href' => $scripturl.'?action=director;area=slacker',
-                        'show' => !$user_info['is_guest'],
+                        'show' => $context['allow_moderation_center'],
 					),
 					'apiCheck' => array(
                         'title' => 'API Checker',
                         'href' => $scripturl.'?action=director;area=apiCheck',
-                        'show' => !$user_info['is_guest'],
+                        'show' => $context['allow_moderation_center'],
 					),
 				),
 				'is_last' => $context['right_to_left'],
